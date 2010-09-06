@@ -18,7 +18,7 @@ object SettingsForm: TSettingsForm
   Scaled = False
   OnActivate = FormActivate
   OnCreate = FormCreate
-  PixelsPerInch = 96
+  PixelsPerInch = 120
   TextHeight = 12
   object Bevel1: TBevel
     Left = 0
@@ -89,9 +89,9 @@ object SettingsForm: TSettingsForm
     end
     object DisableCommandline: TCheckBox
       Left = 14
-      Top = 50
+      Top = 47
       Width = 115
-      Height = 13
+      Height = 18
       HelpContext = 31
       Caption = '#disable_commandline'
       ParentShowHint = False
@@ -136,7 +136,7 @@ object SettingsForm: TSettingsForm
       Left = 130
       Top = 26
       Width = 109
-      Height = 13
+      Height = 18
       HelpContext = 2
       Caption = '#noVBO'
       Font.Charset = DEFAULT_CHARSET
@@ -151,9 +151,9 @@ object SettingsForm: TSettingsForm
     end
     object windowed: TCheckBox
       Left = 14
-      Top = 26
+      Top = 25
       Width = 103
-      Height = 13
+      Height = 18
       HelpContext = 2
       Caption = '#windowed'
       Font.Charset = DEFAULT_CHARSET
