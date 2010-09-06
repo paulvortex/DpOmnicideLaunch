@@ -11,14 +11,16 @@ object MainForm: TMainForm
   TransparentColorValue = clFuchsia
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -10
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  PrintScale = poNone
+  Scaled = False
   OnCreate = FormCreate
-  PixelsPerInch = 120
-  TextHeight = 16
+  PixelsPerInch = 96
+  TextHeight = 12
   object bg: TImage
     Left = 0
     Top = 0
@@ -11843,17 +11845,17 @@ object MainForm: TMainForm
     OnMouseMove = bgMouseMove
   end
   object Launch: TLabel
-    Left = 32
-    Top = 173
-    Width = 361
-    Height = 44
+    Left = 40
+    Top = 178
+    Width = 337
+    Height = 39
     Alignment = taCenter
     AutoSize = False
     Caption = '#launch'
     Color = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clCream
-    Font.Height = -37
+    Font.Height = -32
     Font.Name = 'Garamond'
     Font.Style = [fsBold]
     ParentColor = False
@@ -11868,17 +11870,17 @@ object MainForm: TMainForm
     OnMouseLeave = LaunchMouseLeave
   end
   object Exit: TLabel
-    Left = 216
+    Left = 258
     Top = 224
-    Width = 161
-    Height = 41
+    Width = 121
+    Height = 31
     Alignment = taRightJustify
     AutoSize = False
     Caption = '#quit'
     Color = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clCream
-    Font.Height = -30
+    Font.Height = -27
     Font.Name = 'Garamond'
     Font.Style = [fsBold]
     ParentColor = False
@@ -11893,16 +11895,16 @@ object MainForm: TMainForm
     OnMouseLeave = ExitMouseLeave
   end
   object Settings: TLabel
-    Left = 47
+    Left = 35
     Top = 224
-    Width = 170
-    Height = 41
+    Width = 128
+    Height = 31
     AutoSize = False
     Caption = '#settings'
     Color = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clCream
-    Font.Height = -30
+    Font.Height = -27
     Font.Name = 'Garamond'
     Font.Style = [fsBold]
     ParentColor = False
