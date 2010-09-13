@@ -90,7 +90,7 @@ object SettingsForm: TSettingsForm
     object DisableCommandline: TCheckBox
       Left = 14
       Top = 47
-      Width = 115
+      Width = 251
       Height = 18
       HelpContext = 31
       Caption = '#disable_commandline'
@@ -107,6 +107,7 @@ object SettingsForm: TSettingsForm
     Height = 65
     HelpContext = 1
     Caption = '#engine'
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
