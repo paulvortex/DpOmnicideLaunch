@@ -13,7 +13,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  StdCtrls, ShellApi, util, defs;
+  StdCtrls, ShellApi, util, defs, winVersion;
 
 Function ProgramGetString(FormName : String; ControlName : String; C : Integer) : String;
 Function ProgramGetStringPAnsiChar(FormName : String; ControlName : String; C : Integer) : PAnsiChar;
@@ -98,11 +98,18 @@ end;
 }
 
 Function LaunchGameString() : String;
+var
+  s : String;
+  OS : TOSInfo;
 begin
-  if (GetSettingInt('Engine', 0) = 1) Then
-    result := GameExe + '-d3d.exe'
-  else
-    result := GameExe + '.exe';
+  result := GameExe + '.exe';
+  { special exe for 64 bit OS }
+  Os := TOSInfo.Create();
+  if (Os.IsWow64 = true) then begin
+    s := GameExe + '64.exe';
+    if (FileExists(s)) then result := s ;
+  end
+  OS.Destroy();
 end;
 Function LaunchGameParms() : String;
 begin

@@ -14,6 +14,7 @@ uses
   FormMain in 'FormMain.pas' {MainForm},
   FormSettings in 'FormSettings.pas' {SettingsForm},
   common in 'Units\common.pas',
+  winVersion in 'Units\winVersion.pas',
   util in 'Units\util.pas',
   defs in 'Units\defs.pas';
 
