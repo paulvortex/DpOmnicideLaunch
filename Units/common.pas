@@ -107,14 +107,14 @@ begin
   Os := TOSInfo.Create();
   if (Os.IsWow64 = true) then begin
     s := GameExe + '64.exe';
-    if (FileExists(s)) then result := s ;
-  end
+    if (FileExists(s)) then result := s;
+  end;
   OS.Destroy();
 end;
 Function LaunchGameParms() : String;
 begin
   result := '';
-  if (GetSettingBool('CommandlineDisable', False) = True) Then
+  if (GetSettingBool('CommandlineDisable', False) = False) Then
     result := result + GetSetting('Commandline', '') + ' ';
   if (GetSettingBool('noVBO', False) = True) Then
     result := result + '-novbo ';
