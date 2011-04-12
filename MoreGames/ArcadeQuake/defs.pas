@@ -37,9 +37,10 @@ implementation
 
 procedure InitProgram();
 begin
-  GameName := 'Blood Omnicide';
+  GameName := 'Arcade Quake';
   GameCompany := 'Razorwind Games';
-  GameExe := 'omnicide';
+  GameExe := 'darkplaces';
+  GameParms := ' -game aq';
   ColorNormal := $FFFFFF;
   ColorSelected := $22AAFF;
   ColorPressed := $0000AA;
@@ -58,13 +59,13 @@ begin
     if (ControlName = '#caption') then begin
       result := GameName;
     end else if (ControlName = '#launch') then begin
-      if (c = 0) then result := 'Launch game!'
+      if (c = 0) then result := 'Launch!'
       else result := '';
     end else if (ControlName = '#settings') then begin
-      if (c = 0) then result := 'Settings'
+      if (c = 0) then result := 'Setup'
       else result := '';
     end else if (ControlName = '#quit') then begin
-      if (c = 0) then result := 'Quit'
+      if (c = 0) then result := 'X'
       else result := '';
     end;
   end else if (FormName = 'SettingsForm') then begin

@@ -12,11 +12,11 @@ program launch;
 uses
   Forms,
   FormMain in 'FormMain.pas' {MainForm},
-  FormSettings in 'FormSettings.pas' {SettingsForm},
-  defs in 'Units\defs.pas',
-  common in 'Units\common.pas',
-  winVersion in 'Units\winVersion.pas',
-  util in 'Units\util.pas';
+  FormSettings in '..\..\FormSettings.pas' {SettingsForm},
+  defs in 'defs.pas',
+  common in '..\..\Units\common.pas',
+  winVersion in '..\..\Units\winVersion.pas',
+  util in '..\..\Units\util.pas';
   
 {$R *.res}
 

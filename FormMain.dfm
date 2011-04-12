@@ -19,7 +19,7 @@ object MainForm: TMainForm
   PrintScale = poNone
   Scaled = False
   OnCreate = FormCreate
-  PixelsPerInch = 96
+  PixelsPerInch = 120
   TextHeight = 12
   object bg: TImage
     Left = 0
