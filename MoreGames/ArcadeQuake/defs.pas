@@ -40,7 +40,7 @@ begin
   GameName := 'Arcade Quake';
   GameCompany := 'Razorwind Games';
   GameExe := 'darkplaces';
-  GameParms := ' -game aq';
+  GameParms := ' -game arcade';
   ColorNormal := $FFFFFF;
   ColorSelected := $22AAFF;
   ColorPressed := $0000AA;

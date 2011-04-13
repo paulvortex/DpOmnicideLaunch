@@ -19,7 +19,7 @@ object MainForm: TMainForm
   PrintScale = poNone
   Scaled = False
   OnCreate = FormCreate
-  PixelsPerInch = 120
+  PixelsPerInch = 96
   TextHeight = 12
   object bg: TImage
     Left = 0
@@ -7523,10 +7523,11 @@ object MainForm: TMainForm
     OnMouseMove = bgMouseMove
   end
   object Launch: TLabel
-    Left = 10
-    Top = 202
+    Left = 207
+    Top = 203
     Width = 121
     Height = 31
+    Alignment = taRightJustify
     AutoSize = False
     Caption = '#launch'
     Color = clWhite
@@ -7572,11 +7573,10 @@ object MainForm: TMainForm
     OnMouseLeave = ExitMouseLeave
   end
   object Settings: TLabel
-    Left = 202
-    Top = 202
+    Left = 11
+    Top = 203
     Width = 128
     Height = 31
-    Alignment = taRightJustify
     AutoSize = False
     Caption = '#settings'
     Color = clWhite

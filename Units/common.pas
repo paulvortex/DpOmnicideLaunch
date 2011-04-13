@@ -51,8 +51,6 @@ var
   OS : TOSInfo;
 begin
   result := GameExe + '.exe';
-  if (GameParms <> '') then
-	  result := result + GameParms;
   { special exe for 64 bit OS }
   Os := TOSInfo.Create();
   if (Os.IsWow64 = true) then begin
@@ -63,7 +61,9 @@ begin
 end;
 Function LaunchGameParms() : String;
 begin
-  result := '';
+  result := GameParms;
+  if (result <> '') then
+	result := result + ' ';
   if (GetSettingBool('CommandlineDisable', False) = False) Then
     result := result + GetSetting('Commandline', '') + ' ';
   if (GetSettingBool('noVBO', False) = True) Then
