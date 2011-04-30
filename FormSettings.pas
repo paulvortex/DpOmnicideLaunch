@@ -23,11 +23,13 @@ type
     CommandlineGroup: TGroupBox;
     Commandline: TEdit;
     DisableCommandline: TCheckBox;
-    EngineGroup: TRadioGroup;
     SafeModeGroup: TGroupBox;
     Bevel1: TBevel;
     noVBO: TCheckBox;
     windowed: TCheckBox;
+    UseLog: TCheckBox;
+    Language: TGroupBox;
+    LangList: TComboBox;
     procedure SaveClick(Sender: TObject);
     procedure DisableCommandlineClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -44,33 +46,56 @@ var
 
 implementation
 
+uses FormMain, FormMapeditor;
+
 {$R *.dfm}
 
 procedure LoadSettings();
+var
+  i : Integer;
 begin
-  SettingsForm.EngineGroup.ItemIndex := GetSettingInt('Engine', 0);
+  GetSettingInt('Engine', 0);
   SettingsForm.windowed.Checked := GetSettingBool('windowed', False);
   SettingsForm.noVBO.Checked := GetSettingBool('noVBO', False);
+  SettingsForm.UseLog.Checked := SetSettingBool('developerMode', False);
   SettingsForm.Commandline.Text := GetSetting('Commandline', '');
   SettingsForm.DisableCommandline.Checked := GetSettingBool('CommandlineDisable', False);
+  { load language }
+  SettingsForm.LangList.ItemIndex := 0;
+  for i := 0 to NumLanguages-1 do
+    if (Languages[i] = Language) then
+      SettingsForm.LangList.ItemIndex := i;
 end;
 
 procedure SaveSettings();
+var
+  OldLang : String;
 begin
-  SetSettingInt('Engine', SettingsForm.EngineGroup.ItemIndex);
+  SetSettingInt('Engine', 0);
   SetSettingBool('windowed', SettingsForm.windowed.Checked);
   SetSettingBool('noVBO', SettingsForm.noVBO.Checked);
+  SetSettingBool('developerMode', SettingsForm.UseLog.Checked);
   SetSetting('Commandline', SettingsForm.Commandline.Text);
   SetSettingBool('CommandlineDisable', SettingsForm.DisableCommandline.Checked);
+  SetSetting('LauncherLang', SettingsForm.LangList.Items[SettingsForm.LangList.ItemIndex]);
+  { update language }
+  OldLang := Language;
+  Language := GetSetting('LauncherLang', 'English');
+  if (OldLang <> Language) then begin
+    MainForm.FormCreate(nil);
+    SettingsForm.FormCreate(nil);
+    frmMapeditor.FormCreate(nil);
+  end;
 end;
 
 procedure ResetSettings();
 begin
-  SettingsForm.EngineGroup.ItemIndex := 0;
   SettingsForm.windowed.Checked := False;
   SettingsForm.noVBO.Checked := False;
+  SettingsForm.UseLog.Checked := False;
   SettingsForm.Commandline.Text := '';
   SettingsForm.DisableCommandline.Checked := False;
+  SettingsForm.LangList.ItemIndex := 0;
 end;
 
 { Form stuff }
@@ -92,9 +117,11 @@ begin
 end;
 
 procedure TSettingsForm.FormCreate(Sender: TObject);
+var
+  s : String;
+  i : Integer;
 begin
   SettingsForm.Caption := ProgramGetString('SettingsForm', '#caption', 0);
-  EngineGroup.Caption := ProgramGetString('SettingsForm', '#engine', 0);
   SafeModeGroup.Caption := ProgramGetString('SettingsForm', '#safemode', 0);
   windowed.Caption := ProgramGetString('SettingsForm', '#windowed', 0);
   windowed.Hint := ProgramGetString('SettingsForm', '#windowed', 1);
@@ -107,6 +134,18 @@ begin
   Reset.Hint := ProgramGetString('SettingsForm', '#reset', 1);
   Save.Caption := ProgramGetString('SettingsForm', '#save', 0);
   Save.Hint := ProgramGetString('SettingsForm', '#save', 1);
+  UseLog.Caption := ProgramGetString('SettingsForm', '#uselog', 0);
+  UseLog.Hint := ProgramGetString('SettingsForm', '#uselog', 1);
+  Language.Caption := ProgramGetString('SettingsForm', '#language', 0);
+  Language.Hint := ProgramGetString('SettingsForm', '#language', 1);
+  { set languages }
+  s := '';
+  for i := 0 to NumLanguages-1 do begin
+    if (s <> '') then s := s + ';';
+    s := s + Languages[i];
+  end;
+  LangList.Items.Delimiter := ';';
+  LangList.Items.DelimitedText := s;
 end;
 
 procedure TSettingsForm.FormActivate(Sender: TObject);

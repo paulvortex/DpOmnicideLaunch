@@ -1,10 +1,10 @@
 object SettingsForm: TSettingsForm
-  Left = 669
-  Top = 241
+  Left = 75
+  Top = 122
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Launch settings'
-  ClientHeight = 286
+  ClientHeight = 311
   ClientWidth = 288
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,13 +22,13 @@ object SettingsForm: TSettingsForm
   TextHeight = 12
   object Bevel1: TBevel
     Left = 0
-    Top = 240
+    Top = 256
     Width = 289
     Height = 2
   end
   object Reset: TButton
     Left = 6
-    Top = 246
+    Top = 270
     Width = 115
     Height = 35
     HelpKeyword = 'btnReset'
@@ -47,7 +47,7 @@ object SettingsForm: TSettingsForm
   end
   object Save: TButton
     Left = 176
-    Top = 246
+    Top = 270
     Width = 105
     Height = 35
     HelpKeyword = 'btnSave'
@@ -66,9 +66,9 @@ object SettingsForm: TSettingsForm
   end
   object CommandlineGroup: TGroupBox
     Left = 6
-    Top = 152
+    Top = 163
     Width = 275
-    Height = 73
+    Height = 78
     Caption = '#commandline '
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -78,8 +78,8 @@ object SettingsForm: TSettingsForm
     ParentFont = False
     TabOrder = 2
     object Commandline: TEdit
-      Left = 6
-      Top = 18
+      Left = 8
+      Top = 20
       Width = 259
       Height = 22
       HelpContext = 30
@@ -89,7 +89,7 @@ object SettingsForm: TSettingsForm
     end
     object DisableCommandline: TCheckBox
       Left = 14
-      Top = 47
+      Top = 48
       Width = 251
       Height = 18
       HelpContext = 31
@@ -100,31 +100,11 @@ object SettingsForm: TSettingsForm
       OnClick = DisableCommandlineClick
     end
   end
-  object EngineGroup: TRadioGroup
-    Left = 6
-    Top = 8
-    Width = 275
-    Height = 65
-    HelpContext = 1
-    Caption = '#engine'
-    Enabled = False
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ItemIndex = 0
-    Items.Strings = (
-      'OpenGL'
-      'Direct3D')
-    ParentFont = False
-    TabOrder = 3
-  end
   object SafeModeGroup: TGroupBox
     Left = 6
-    Top = 84
+    Top = 76
     Width = 275
-    Height = 55
+    Height = 77
     Caption = '#safemode'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -132,7 +112,7 @@ object SettingsForm: TSettingsForm
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 4
+    TabOrder = 3
     object noVBO: TCheckBox
       Left = 130
       Top = 26
@@ -167,9 +147,48 @@ object SettingsForm: TSettingsForm
       ShowHint = True
       TabOrder = 1
     end
+    object UseLog: TCheckBox
+      Left = 14
+      Top = 49
+      Width = 251
+      Height = 18
+      HelpContext = 2
+      Caption = '#use_log'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+    end
+  end
+  object Language: TGroupBox
+    Left = 6
+    Top = 6
+    Width = 275
+    Height = 61
+    Caption = '#language'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 4
+    object LangList: TComboBox
+      Left = 16
+      Top = 24
+      Width = 241
+      Height = 22
+      ItemHeight = 14
+      TabOrder = 0
+    end
   end
   object XPManifest1: TXPManifest
     Left = 136
-    Top = 248
+    Top = 272
   end
 end

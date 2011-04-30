@@ -22,6 +22,7 @@ type
     Launch: TLabel;
     Exit: TLabel;
     Settings: TLabel;
+    MapEditor: TLabel;
     procedure LaunchMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure LaunchMouseUp(Sender: TObject; Button: TMouseButton;
@@ -46,6 +47,13 @@ type
       Y: Integer);
     procedure FormCreate(Sender: TObject);
     procedure LaunchClick(Sender: TObject);
+    procedure MapEditorMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure MapEditorMouseEnter(Sender: TObject);
+    procedure MapEditorMouseLeave(Sender: TObject);
+    procedure MapEditorMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure MapEditorClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -60,7 +68,7 @@ var
 
 implementation
 
-uses FormSettings;
+uses FormSettings, FormMapeditor;
 
 {$R *.dfm}
 
@@ -79,6 +87,9 @@ begin
   Exit.Font.Color := ColorNormal;
   Exit.Caption := ProgramGetString('MainForm', '#quit', 0);
   Exit.Hint := ProgramGetString('MainForm', '#quit', 1);
+  MapEditor.Font.Color := ColorNormal;
+  MapEditor.Caption := ProgramGetString('MainForm', '#mapeditor', 0);
+  MapEditor.Hint := ProgramGetString('MainForm', '#mapeditor', 1);
   { setup positions }
   if (GameName = 'Steel Storm') then begin
     MainForm.Launch.Left := 23;
@@ -190,7 +201,36 @@ end;
 
 procedure TMainForm.LaunchClick(Sender: TObject);
 begin
-  LaunchGame
+  LaunchGame('', '');
+end;
+
+procedure TMainForm.MapEditorMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  MapEditor.Font.Color := ColorPressed;
+end;
+
+procedure TMainForm.MapEditorMouseEnter(Sender: TObject);
+begin
+  MapEditor.Font.Color := ColorSelected;
+end;
+
+procedure TMainForm.MapEditorMouseLeave(Sender: TObject);
+begin
+  MapEditor.Font.Color := ColorNormal;
+end;
+
+procedure TMainForm.MapEditorMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  MapEditor.Font.Color := ColorNormal;
+end;
+
+procedure TMainForm.MapEditorClick(Sender: TObject);
+begin
+  frmMapeditor.Left := Round(self.Left + (self.Width - frmMapeditor.Width)*0.5);
+  frmMapeditor.Top := Round(self.Top + (self.Height - frmMapeditor.Height)*0.5);
+  frmMapeditor.ShowModal
 end;
 
 end.

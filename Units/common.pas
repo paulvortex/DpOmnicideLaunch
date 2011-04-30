@@ -16,8 +16,8 @@ uses
   StdCtrls, ShellApi, util, defs, winVersion;
 
 Function ProgramGetStringPAnsiChar(FormName : String; ControlName : String; C : Integer) : PAnsiChar;
+Function LaunchGame(cmdline : String; cmdparms : String) : String;
 Function LaunchGameString : String;
-Function LaunchGame : String;
 
 implementation
 
@@ -70,27 +70,31 @@ begin
     result := result + '-novbo ';
   if (GetSettingBool('windowed', False) = True) Then
     result := result + '-window ';
+  if (GetSettingBool('developerMode', False) = True) Then
+    result := result + '-developer +set log_file omnicide.log +set prvm_backtraceforwarnings 1 +set prvm_errordump 1 ';
 end;
-Function LaunchGame() : String;
+Function LaunchGame(cmdline : String; cmdparms : String) : String;
 var
   f : PAnsiChar;
   c : PAnsiChar;
   m : PAnsiChar;
   s : String;
 begin
+  if (cmdline = '') then cmdline := LaunchGameString();
+  if (cmdparms = '') then cmdparms := LaunchGameParms();
   try
-    if not (FileExists(LaunchGameString())) then begin
-      s := ProgramGetString('Generic', '#execerror', 0) + LaunchGameString() + ' ' + LaunchGameParms();
+    if not (FileExists(cmdline)) then begin
+      s := ProgramGetString('Generic', '#execerror', 0) + cmdline + ' ' + cmdparms;
       m := PAnsiChar(s);
       Application.MessageBox(m, ProgramGetStringPAnsiChar('Generic', '#err', 0), 0);
     end else begin
-      f := PAnsiChar(LaunchGameString());
-      c := PAnsiChar(LaunchGameParms());
+      f := PAnsiChar(cmdline);
+      c := PAnsiChar(cmdparms);
       Application.MainForm.Close();
       ShellExecute(0, nil, f, c, nil, SW_SHOWNORMAL);
     end;
   except
-    s := ProgramGetString('Generic', '#execerror', 0) + chr(13) + chr(10) + ' ' + chr(13) + chr(10) + LaunchGameString() + ' ' + LaunchGameParms();
+    s := ProgramGetString('Generic', '#execerror', 0) + chr(13) + chr(10) + ' ' + chr(13) + chr(10) + cmdline + ' ' + cmdparms;
     m := PAnsiChar(s);
     Application.MessageBox(m, ProgramGetStringPAnsiChar('Generic', '#err', 0), 0);
   end;
