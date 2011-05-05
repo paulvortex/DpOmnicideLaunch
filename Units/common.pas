@@ -72,6 +72,8 @@ begin
     result := result + '-window ';
   if (GetSettingBool('developerMode', False) = True) Then
     result := result + '-developer +set log_file omnicide.log +set prvm_backtraceforwarnings 1 +set prvm_errordump 1 ';
+  if (GetSettingBool('noHome', False) = True) Then
+    result := result + '-nohome ';
 end;
 Function LaunchGame(cmdline : String; cmdparms : String) : String;
 var

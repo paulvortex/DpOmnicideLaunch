@@ -4,7 +4,7 @@ object SettingsForm: TSettingsForm
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Launch settings'
-  ClientHeight = 311
+  ClientHeight = 344
   ClientWidth = 288
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,17 +18,17 @@ object SettingsForm: TSettingsForm
   Scaled = False
   OnActivate = FormActivate
   OnCreate = FormCreate
-  PixelsPerInch = 120
+  PixelsPerInch = 96
   TextHeight = 12
   object Bevel1: TBevel
     Left = 0
-    Top = 256
+    Top = 288
     Width = 289
     Height = 2
   end
   object Reset: TButton
     Left = 6
-    Top = 270
+    Top = 302
     Width = 115
     Height = 35
     HelpKeyword = 'btnReset'
@@ -47,7 +47,7 @@ object SettingsForm: TSettingsForm
   end
   object Save: TButton
     Left = 176
-    Top = 270
+    Top = 302
     Width = 105
     Height = 35
     HelpKeyword = 'btnSave'
@@ -66,7 +66,7 @@ object SettingsForm: TSettingsForm
   end
   object CommandlineGroup: TGroupBox
     Left = 6
-    Top = 163
+    Top = 187
     Width = 275
     Height = 78
     Caption = '#commandline '
@@ -104,7 +104,7 @@ object SettingsForm: TSettingsForm
     Left = 6
     Top = 76
     Width = 275
-    Height = 77
+    Height = 101
     Caption = '#safemode'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -149,7 +149,7 @@ object SettingsForm: TSettingsForm
     end
     object UseLog: TCheckBox
       Left = 14
-      Top = 49
+      Top = 73
       Width = 251
       Height = 18
       HelpContext = 2
@@ -163,6 +163,23 @@ object SettingsForm: TSettingsForm
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
+    end
+    object NoHome: TCheckBox
+      Left = 14
+      Top = 49
+      Width = 251
+      Height = 18
+      HelpContext = 2
+      Caption = '#nohome'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
     end
   end
   object Language: TGroupBox
@@ -189,6 +206,6 @@ object SettingsForm: TSettingsForm
   end
   object XPManifest1: TXPManifest
     Left = 136
-    Top = 272
+    Top = 304
   end
 end

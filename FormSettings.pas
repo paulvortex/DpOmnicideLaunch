@@ -30,6 +30,7 @@ type
     UseLog: TCheckBox;
     Language: TGroupBox;
     LangList: TComboBox;
+    NoHome: TCheckBox;
     procedure SaveClick(Sender: TObject);
     procedure DisableCommandlineClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -57,6 +58,7 @@ begin
   GetSettingInt('Engine', 0);
   SettingsForm.windowed.Checked := GetSettingBool('windowed', False);
   SettingsForm.noVBO.Checked := GetSettingBool('noVBO', False);
+  SettingsForm.NoHome.Checked := GetSettingBool('noHome', False);
   SettingsForm.UseLog.Checked := SetSettingBool('developerMode', False);
   SettingsForm.Commandline.Text := GetSetting('Commandline', '');
   SettingsForm.DisableCommandline.Checked := GetSettingBool('CommandlineDisable', False);
@@ -74,6 +76,7 @@ begin
   SetSettingInt('Engine', 0);
   SetSettingBool('windowed', SettingsForm.windowed.Checked);
   SetSettingBool('noVBO', SettingsForm.noVBO.Checked);
+  SetSettingBool('noHome', SettingsForm.NoHome.Checked);
   SetSettingBool('developerMode', SettingsForm.UseLog.Checked);
   SetSetting('Commandline', SettingsForm.Commandline.Text);
   SetSettingBool('CommandlineDisable', SettingsForm.DisableCommandline.Checked);
@@ -93,13 +96,13 @@ begin
   SettingsForm.windowed.Checked := False;
   SettingsForm.noVBO.Checked := False;
   SettingsForm.UseLog.Checked := False;
+  SettingsForm.NoHome.Checked := False;
   SettingsForm.Commandline.Text := '';
   SettingsForm.DisableCommandline.Checked := False;
   SettingsForm.LangList.ItemIndex := 0;
 end;
 
 { Form stuff }
-
 procedure TSettingsForm.SaveClick(Sender: TObject);
 begin
   SaveSettings();
@@ -138,6 +141,8 @@ begin
   UseLog.Hint := ProgramGetString('SettingsForm', '#uselog', 1);
   Language.Caption := ProgramGetString('SettingsForm', '#language', 0);
   Language.Hint := ProgramGetString('SettingsForm', '#language', 1);
+  NoHome.Caption := ProgramGetString('SettingsForm', '#nohome', 0);
+  NoHome.Hint := ProgramGetString('SettingsForm', '#nohome', 1);
   { set languages }
   s := '';
   for i := 0 to NumLanguages-1 do begin

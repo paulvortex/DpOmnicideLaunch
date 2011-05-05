@@ -57,7 +57,10 @@ begin
 end;
 
 Function ProgramGetStringEng(FormName : String; ControlName : String; C : Integer) : String;
+var
+  nl : String;
 begin
+  nl := chr(13) + chr(10);
   if (FormName = 'Generic') then begin
     if (ControlName = '#execerror') then begin
       result := 'Failed execute game, perharps file not found!' + chr(13) + chr(10) + 'commandline was: ' + chr(13) + chr(10);
@@ -97,10 +100,10 @@ begin
       else result := 'Run game in windowed state instead of fullscreen.';
     end else if (ControlName = '#novbo') then begin
       if (c = 0) then result := 'Disable VBO'
-      else result := 'Disable Vertex Buffer Objects feature if you have weird triangles showing during gameplay.';
+      else result := 'Disable Vertex Buffer Objects feature if you'+nl+'have weird triangles showing during gameplay.';
     end else if (ControlName = '#disable_commandline') then begin
       if (c = 0) then result := 'Disable commandline'
-      else result := 'This will disable additional commandline even if it has some text in it.';
+      else result := 'This will disable additional commandline'+nl+'even if it has some text in it.';
     end else if (ControlName = '#reset') then begin
       if (c = 0) then result := 'Reset to defaults'
       else result := 'Reset all settings to default values.';
@@ -113,13 +116,16 @@ begin
     end else if (ControlName = '#language') then begin
       if (c = 0) then result := 'GUI language'
       else result := 'Set the GUI language for launcher.';
+    end else if (ControlName = '#nohome') then begin
+      if (c = 0) then result := 'Disable usage of homedir'
+      else result := 'Dont save user files (config, rtlights, saves) to homedir,'+nl+'so always save them to basedir.'+nl+'On Windows Vista/7 homedir is'+nl+'My Documents/My Games/[gamename].';
     end;
   end else if (FormName = 'MapeditorForm') then begin
     if (ControlName = '#caption') then begin
       result := 'Launch mapeditor';
     end else if (ControlName = '#reset') then begin
       if (c = 0) then result := 'Reset all settings to defaults'
-      else result := 'This will reset all GtkRadiant settings to their default values';
+      else result := 'This will reset all GtkRadiant'+nl+'settings to their default values';
     end else if (ControlName = '#launch') then begin
       if (c = 0) then result := 'Launch Level Editor'
       else result := 'Launch GtkRadiant/NetRadiant level editor.';
@@ -128,7 +134,10 @@ begin
 end;
 
 Function ProgramGetStringRus(FormName : String; ControlName : String; C : Integer) : String;
+var
+  nl : String;
 begin
+  nl := chr(13) + chr(10);
   if (FormName = 'Generic') then begin
     if (ControlName = '#execerror') then begin
       result := 'Невозможно запустить, не найден файл приложения!' + chr(13) + chr(10) + 'командная строка: ' + chr(13) + chr(10);
@@ -168,10 +177,10 @@ begin
       else result := 'Запуск игры в оконном режиме.';
     end else if (ControlName = '#novbo') then begin
       if (c = 0) then result := 'Выключить VBO'
-      else result := 'Выключение Vertex Buffer Objects для избегания багов на некоторых вижеокартах.';
+      else result := 'Выключение Vertex Buffer Objects для избегания'+nl+'багов на некоторых вижеокартах.';
     end else if (ControlName = '#disable_commandline') then begin
       if (c = 0) then result := 'Не применять доп. параметры'
-      else result := 'Отключение выполнения строки дополнительных параметров, но они все равно будут сохранены.';
+      else result := 'Отключение выполнения строки дополнительных параметров,'+nl+'но они все равно будут сохранены.';
     end else if (ControlName = '#reset') then begin
       if (c = 0) then result := 'Сброс'
       else result := 'Сбросить все опции на исходные значения.';
@@ -184,13 +193,16 @@ begin
     end else if (ControlName = '#language') then begin
       if (c = 0) then result := 'Язык интерфейса'
       else result := 'Устанавливает язык интерфейса для загрузчика.';
+    end else if (ControlName = '#nohome') then begin
+      if (c = 0) then result := 'Не использовать ''Мои Документы'''
+      else result := 'Не использовать папку пользователя для хранения конфиг-файлов, сохранений'+nl+'и других файлов - всегда использовать папку игры. В Windows Vista/7 папка пользователя это'+nl+'Мои документы/My Games/[имя игры].';
     end;
   end else if (FormName = 'MapeditorForm') then begin
     if (ControlName = '#caption') then begin
       result := 'Запуск редактора уровней';
     end else if (ControlName = '#reset') then begin
       if (c = 0) then result := 'Сброс настроек редактора'
-      else result := 'Сбросить все пользовательские настройки редактора до значений по умолчанию.';
+      else result := 'Сбросить все пользовательские настройки'+nl+'редактора до значений по умолчанию.';
     end else if (ControlName = '#launch') then begin
       if (c = 0) then result := 'Запуск редактора уровней'
       else result := 'Запустить GtkRadiant/NetRadiant.';
