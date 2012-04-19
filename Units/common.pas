@@ -51,10 +51,31 @@ var
   OS : TOSInfo;
 begin
   result := GameExe + '.exe';
-  { special exe for 64 bit OS }
+  { special exe for 64 bit OS, special exe for developer mode }
   Os := TOSInfo.Create();
   if (Os.IsWow64 = true) then begin
-    s := GameExe + '64.exe';
+    if (GetSettingBool('developerMode', False) = True) then begin
+      { try '-dev64.exe' '-dev.exe' '64.exe' '.exe' }
+      s := GameExe + '-dev64.exe';
+      if (FileExists(s)) then
+        result := s
+      else begin
+        s := GameExe + '-dev.exe';
+        if (FileExists(s)) then
+          result := s
+        else begin
+          s := GameExe + '64.exe';
+          if (FileExists(s)) then result := s;
+        end;
+      end;
+    end else begin
+      { try '64.exe' '.exe' }
+      s := GameExe + '64.exe';
+      if (FileExists(s)) then result := s;
+    end;
+  end else if (GetSettingBool('developerMode', False) = True) then begin
+    { try '-dev.exe' '.exe' }
+    s := GameExe + '-dev.exe';
     if (FileExists(s)) then result := s;
   end;
   OS.Destroy();

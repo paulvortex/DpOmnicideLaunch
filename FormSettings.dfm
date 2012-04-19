@@ -18,7 +18,7 @@ object SettingsForm: TSettingsForm
   Scaled = False
   OnActivate = FormActivate
   OnCreate = FormCreate
-  PixelsPerInch = 96
+  PixelsPerInch = 120
   TextHeight = 12
   object Bevel1: TBevel
     Left = 0

@@ -59,7 +59,7 @@ begin
   SettingsForm.windowed.Checked := GetSettingBool('windowed', False);
   SettingsForm.noVBO.Checked := GetSettingBool('noVBO', False);
   SettingsForm.NoHome.Checked := GetSettingBool('noHome', False);
-  SettingsForm.UseLog.Checked := SetSettingBool('developerMode', False);
+  SettingsForm.UseLog.Checked := GetSettingBool('developerMode', False);
   SettingsForm.Commandline.Text := GetSetting('Commandline', '');
   SettingsForm.DisableCommandline.Checked := GetSettingBool('CommandlineDisable', False);
   { load language }
