@@ -126,6 +126,9 @@ begin
     end else if (ControlName = '#reset') then begin
       if (c = 0) then result := 'Reset all settings to defaults'
       else result := 'This will reset all GtkRadiant'+nl+'settings to their default values';
+    end else if (ControlName = '#disable_aero') then begin
+      if (c = 0) then result := 'Disable Windows Aero'
+      else result := 'GtkGlib that is used by radiant to render viewports is not fully compatible with Microsoft Aero (Vista/Windows 7). Set this flag if you experience problems with 2d or 3d views.';
     end else if (ControlName = '#launch') then begin
       if (c = 0) then result := 'Launch Level Editor'
       else result := 'Launch GtkRadiant/NetRadiant level editor.';

@@ -27,6 +27,8 @@ Function SetSetting(SettingName : String; NewValue : String) : Boolean;
 Function SetSettingInt(SettingName : String; NewValue : Integer) : Boolean;
 { set a boolean setting }
 Function SetSettingBool(SettingName : String; NewValue : Boolean) : Boolean;
+{ set compatibility mode flags for a program }
+Function SetCompatibilityFlag(ExePath : String; ModeFlag : String; Value : Boolean) : Boolean;
 
 var
   SettingStr : String;
@@ -183,6 +185,77 @@ begin
     result := SetProgramSetting(SettingName, 'true', 2)
   else
     result := SetProgramSetting(SettingName, 'false', 2);
+end;
+
+{ set compatibility mode flags for a program }
+Function SetCompatibilityFlag(ExePath : String; ModeFlag : String; Value : Boolean) : Boolean;
+var
+   r : TRegistry;
+   t : TRegDataType;
+   oldFlags, newFlags, flags, flag : string;
+   i, f, l : integer;
+   passed, exists : Boolean;
+begin
+  result := False;
+  r := TRegistry.Create();
+  try
+  r.RootKey := HKEY_CURRENT_USER;
+  r.LazyWrite := True;
+  if (r.OpenKey('Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers', true)) then begin
+    { if already exists and wrong type - delete, so we dont get wrong type exception }
+    oldFlags := '';
+    exists := False;
+    if (r.ValueExists(ExePath)) then begin
+      t := r.GetDataType(ExePath);
+      if (t = rdString) then begin
+        oldFlags := r.ReadString(ExePath);
+        exists := True;
+      end else begin
+        r.DeleteValue(ExePath);
+        oldFlags := '';
+      end;
+    end;
+    { get new flags string }
+    newFlags := '';
+    flags := oldFlags + ' ';
+    i := 1;
+    f := 1;
+    l := Length(flags);
+    passed := False;
+    while(i <= l) do begin
+      { when found space - parse flag }
+      if (flags[i] = ' ') then begin
+        if ((i - f) > 0) then begin
+          flag := Copy(flags, f, i - f);
+          { pass flag }
+          if ((flag <> ModeFlag) Or (Value = True)) then begin
+            if (flag = ModeFlag) then passed := true;
+            if (newFlags <> '')  then newFlags := newFlags + ' ';
+                                      newFlags := newFlags + flag;
+          end;
+        end;
+        f := i + 1;
+      end;
+      i := i + 1;
+    end;
+    if ((passed = False) And (Value = True)) then begin
+      if (newFlags <> '')  then newFlags := newFlags + ' ';
+      newFlags := newFlags + ModeFlag;
+    end;
+    
+    { write new }
+    if (oldFlags <> newFlags) then begin
+      if ((newFlags = '') And (exists = True)) then
+        r.DeleteValue(ExePath)
+      else
+        r.WriteString(ExePath, newFlags);
+    end;
+    r.CloseKey();
+    result := True;
+  end;
+  except
+  r.Destroy;
+  end;
 end;
 
 end.
