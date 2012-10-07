@@ -89,6 +89,12 @@ begin
     result := result + GetSetting('Commandline', '') + ' ';
   if (GetSettingBool('noVBO', False) = True) Then
     result := result + '-novbo ';
+  {
+  if (GetSettingBool('noThreading', False) = True) Then
+    result := result + '+set sv_threaded 0 ';
+  }
+  if (GetSettingBool('threading', False) = True) Then
+    result := result + '+set sv_threaded 1 ';
   if (GetSettingBool('windowed', False) = True) Then
     result := result + '-window ';
   if (GetSettingBool('developerMode', False) = True) Then

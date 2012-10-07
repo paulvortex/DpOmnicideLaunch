@@ -4,8 +4,8 @@ object SettingsForm: TSettingsForm
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Launch settings'
-  ClientHeight = 344
-  ClientWidth = 288
+  ClientHeight = 378
+  ClientWidth = 291
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,13 +22,13 @@ object SettingsForm: TSettingsForm
   TextHeight = 12
   object Bevel1: TBevel
     Left = 0
-    Top = 288
+    Top = 320
     Width = 289
     Height = 2
   end
   object Reset: TButton
     Left = 6
-    Top = 302
+    Top = 334
     Width = 115
     Height = 35
     HelpKeyword = 'btnReset'
@@ -47,7 +47,7 @@ object SettingsForm: TSettingsForm
   end
   object Save: TButton
     Left = 176
-    Top = 302
+    Top = 334
     Width = 105
     Height = 35
     HelpKeyword = 'btnSave'
@@ -66,7 +66,7 @@ object SettingsForm: TSettingsForm
   end
   object CommandlineGroup: TGroupBox
     Left = 6
-    Top = 187
+    Top = 219
     Width = 275
     Height = 78
     Caption = '#commandline '
@@ -104,7 +104,7 @@ object SettingsForm: TSettingsForm
     Left = 6
     Top = 76
     Width = 275
-    Height = 101
+    Height = 133
     Caption = '#safemode'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -149,7 +149,7 @@ object SettingsForm: TSettingsForm
     end
     object UseLog: TCheckBox
       Left = 14
-      Top = 73
+      Top = 97
       Width = 251
       Height = 18
       HelpContext = 2
@@ -166,7 +166,7 @@ object SettingsForm: TSettingsForm
     end
     object NoHome: TCheckBox
       Left = 14
-      Top = 49
+      Top = 73
       Width = 251
       Height = 18
       HelpContext = 2
@@ -180,6 +180,41 @@ object SettingsForm: TSettingsForm
       ParentShowHint = False
       ShowHint = True
       TabOrder = 3
+    end
+    object noThreading: TCheckBox
+      Left = 214
+      Top = 50
+      Width = 51
+      Height = 18
+      HelpContext = 2
+      Caption = '#noThreading'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+      Visible = False
+    end
+    object threading: TCheckBox
+      Left = 14
+      Top = 49
+      Width = 251
+      Height = 18
+      HelpContext = 2
+      Caption = '#threading'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
     end
   end
   object Language: TGroupBox
@@ -206,6 +241,6 @@ object SettingsForm: TSettingsForm
   end
   object XPManifest1: TXPManifest
     Left = 136
-    Top = 304
+    Top = 336
   end
 end

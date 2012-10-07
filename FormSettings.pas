@@ -31,6 +31,8 @@ type
     Language: TGroupBox;
     LangList: TComboBox;
     NoHome: TCheckBox;
+    noThreading: TCheckBox;
+    threading: TCheckBox;
     procedure SaveClick(Sender: TObject);
     procedure DisableCommandlineClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -58,6 +60,11 @@ begin
   GetSettingInt('Engine', 0);
   SettingsForm.windowed.Checked := GetSettingBool('windowed', False);
   SettingsForm.noVBO.Checked := GetSettingBool('noVBO', False);
+  {
+  SettingsForm.noThreading.Checked := GetSettingBool('noThreading', False);
+  }
+  SettingsForm.threading.Checked := GetSettingBool('threading', False);
+  {}
   SettingsForm.NoHome.Checked := GetSettingBool('noHome', False);
   SettingsForm.UseLog.Checked := GetSettingBool('developerMode', False);
   SettingsForm.Commandline.Text := GetSetting('Commandline', '');
@@ -76,6 +83,11 @@ begin
   SetSettingInt('Engine', 0);
   SetSettingBool('windowed', SettingsForm.windowed.Checked);
   SetSettingBool('noVBO', SettingsForm.noVBO.Checked);
+  {
+  SetSettingBool('noThreading', SettingsForm.noThreading.Checked);
+  }
+  SetSettingBool('threading', SettingsForm.threading.Checked);
+  {}
   SetSettingBool('noHome', SettingsForm.NoHome.Checked);
   SetSettingBool('developerMode', SettingsForm.UseLog.Checked);
   SetSetting('Commandline', SettingsForm.Commandline.Text);
@@ -95,6 +107,11 @@ procedure ResetSettings();
 begin
   SettingsForm.windowed.Checked := False;
   SettingsForm.noVBO.Checked := False;
+  {
+  SettingsForm.noThreading.Checked := False;
+  }
+  SettingsForm.threading.Checked := False;
+  {}
   SettingsForm.UseLog.Checked := False;
   SettingsForm.NoHome.Checked := False;
   SettingsForm.Commandline.Text := '';
@@ -130,6 +147,13 @@ begin
   windowed.Hint := ProgramGetString('SettingsForm', '#windowed', 1);
   noVBO.Caption := ProgramGetString('SettingsForm', '#novbo', 0);
   noVBO.Hint := ProgramGetString('SettingsForm', '#novbo', 1);
+  {
+  noThreading.Caption := ProgramGetString('SettingsForm', '#nothreading', 0);
+  noThreading.Hint := ProgramGetString('SettingsForm', '#nothreading', 1);
+  }
+  threading.Caption := ProgramGetString('SettingsForm', '#threading', 0);
+  threading.Hint := ProgramGetString('SettingsForm', '#threading', 1);
+  {}
   CommandlineGroup.Caption := ProgramGetString('SettingsForm', '#commandline', 0);
   DisableCommandline.Caption := ProgramGetString('SettingsForm', '#disable_commandline', 0);
   DisableCommandline.Hint := ProgramGetString('SettingsForm', '#disable_commandline', 1);

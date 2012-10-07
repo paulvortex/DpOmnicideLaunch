@@ -101,6 +101,12 @@ begin
     end else if (ControlName = '#novbo') then begin
       if (c = 0) then result := 'Disable VBO'
       else result := 'Disable Vertex Buffer Objects feature if you'+nl+'have weird triangles showing during gameplay.';
+    end else if (ControlName = '#nothreading') then begin
+      if (c = 0) then result := 'No Threading'
+      else result := 'Disable threading support which accelerates rendering by running physics in separate thread.'+nl+'Disabling this will decrease game performance. Use only for issues tracking.';
+    end else if (ControlName = '#threading') then begin
+      if (c = 0) then result := 'Multiple threads'
+      else result := 'Enables multiple threading to accelerate physics.'+nl+' Highly experimental. Can lead to crashes and bugs.';
     end else if (ControlName = '#disable_commandline') then begin
       if (c = 0) then result := 'Disable commandline'
       else result := 'This will disable additional commandline'+nl+'even if it has some text in it.';
@@ -181,6 +187,14 @@ begin
     end else if (ControlName = '#novbo') then begin
       if (c = 0) then result := 'Выключить VBO'
       else result := 'Выключение Vertex Buffer Objects для избегания'+nl+'багов на некоторых вижеокартах.';
+    {
+    end else if (ControlName = '#nothreading') then begin
+      if (c = 0) then result := 'Отключить многопоточность'
+      else result := 'Выключает многопоточную оптимизацию которая используется для ускорения физики.'+nl+' Отключение многопоточности негативно скажется на производительности.';
+    }
+    end else if (ControlName = '#threading') then begin
+      if (c = 0) then result := 'Многопоточность'
+      else result := 'Включает многопоточную оптимизацию которая используется для ускорения физики.'+nl+' Экспериментальная настройка, может привести к вылетам и багам.';
     end else if (ControlName = '#disable_commandline') then begin
       if (c = 0) then result := 'Не применять доп. параметры'
       else result := 'Отключение выполнения строки дополнительных параметров,'+nl+'но они все равно будут сохранены.';
