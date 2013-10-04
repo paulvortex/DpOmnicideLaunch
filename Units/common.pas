@@ -105,7 +105,7 @@ end;
 Function LaunchGame(cmdline : String; cmdparms : String) : String;
 var
   f : PAnsiChar;
-  c : PAnsiChar;
+  //c : PAnsiChar;
   m : PAnsiChar;
   s : String;
 begin
@@ -117,10 +117,12 @@ begin
       m := PAnsiChar(s);
       Application.MessageBox(m, ProgramGetStringPAnsiChar('Generic', '#err', 0), 0);
     end else begin
-      f := PAnsiChar(cmdline);
-      c := PAnsiChar(cmdparms);
+      f := PAnsiChar(cmdline + ' ' + cmdparms);
+      WinExec(f, SW_SHOW);
+      // f := PAnsiChar(cmdline);
+      // c := PAnsiChar(cmdparms);
+      // ShellExecute(0, nil, f, c, nil, SW_SHOWNORMAL);
       Application.MainForm.Close();
-      ShellExecute(0, nil, f, c, nil, SW_SHOWNORMAL);
     end;
   except
     s := ProgramGetString('Generic', '#execerror', 0) + chr(13) + chr(10) + ' ' + chr(13) + chr(10) + cmdline + ' ' + cmdparms;

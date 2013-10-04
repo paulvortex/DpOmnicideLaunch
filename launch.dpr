@@ -24,6 +24,7 @@ uses
 begin
   Application.Initialize;
   InitProgram();
+  Application.Title := 'DpOmnicide Launcher';
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TSettingsForm, SettingsForm);
   Application.CreateForm(TfrmMapeditor, frmMapeditor);

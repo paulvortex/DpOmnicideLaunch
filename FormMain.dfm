@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 609
-  Top = 240
+  Left = 416
+  Top = 235
   Anchors = []
   BorderStyle = bsNone
   Caption = '#caption'

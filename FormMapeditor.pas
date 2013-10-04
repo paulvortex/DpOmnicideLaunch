@@ -275,7 +275,6 @@ procedure ResetMapeditorSettings();
 var
   p : string;
   needReset : Boolean;
-  f : TextFile;
 begin
   p := ExtractFilePath(Application.ExeName) + 'mapeditor';
 
