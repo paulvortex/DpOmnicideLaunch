@@ -41,21 +41,30 @@ end;
  Game Launch routines
  this builds launch string based on options
  be sure that defaults are same as you have in SettingsForm!
- todo: make generic setting struct in future
 ------------------------
 }
 
-Function LaunchGameString() : String;
+{
+ plain version of game string launch routines
+ tries to launch engine from the same path where launcher is localed
+ checks for:
+   GameExe.exe
+   GameExe64.exe
+   GameExe-dev.exe
+   GameExe-dev64.exe
+}
+Function LaunchGameString_Plain() : String;
 var
   s : String;
   OS : TOSInfo;
 begin
+  OS := TOSInfo.Create();
+  { default to 32 bit .exe }
   result := GameExe + '.exe';
-  { special exe for 64 bit OS, special exe for developer mode }
-  Os := TOSInfo.Create();
+  { special .exe for 64 bit OS, special .exe for developer mode }
   if (Os.IsWow64 = true) then begin
     if (GetSettingBool('developerMode', False) = True) then begin
-      { try '-dev64.exe' '-dev.exe' '64.exe' '.exe' }
+      { try '-dev64.exe' '-dev.exe' '64.exe' }
       s := GameExe + '-dev64.exe';
       if (FileExists(s)) then
         result := s
@@ -68,18 +77,79 @@ begin
           if (FileExists(s)) then result := s;
         end;
       end;
+      {}
     end else begin
-      { try '64.exe' '.exe' }
+      { try '64.exe' }
       s := GameExe + '64.exe';
       if (FileExists(s)) then result := s;
+      {}
     end;
   end else if (GetSettingBool('developerMode', False) = True) then begin
-    { try '-dev.exe' '.exe' }
+    { try '-dev.exe' }
     s := GameExe + '-dev.exe';
     if (FileExists(s)) then result := s;
+    {}
   end;
   OS.Destroy();
 end;
+
+{
+ subdir-based version of game string launch routines
+ tries to launch engine from bin/ subdir
+ checks for:
+   bin32/GameExe.exe
+   bin64/GameExe.exe
+   bin32/GameExe-dev.exe
+   bin64/GameExe-dev.exe
+}
+Function LaunchGameString_SubDir() : String;
+var
+  s : String;
+  OS : TOSInfo;
+begin
+  OS := TOSInfo.Create();
+  { default to bin32/.exe }
+  result := 'bin32\' + GameExe + '.exe';
+  { special .exe for 64 bit OS, special .exe for developer mode }
+  if (Os.IsWow64 = true) then begin
+    if (GetSettingBool('developerMode', False) = True) then begin
+      { try 'bin64/-dev.exe' 'bin32/-dev.exe' 'bin64/.exe' }
+      s := 'bin64\' + GameExe + '-dev.exe';
+      if (FileExists(s)) then
+        result := s
+      else begin
+        s := 'bin32\' + GameExe + '-dev.exe';
+        if (FileExists(s)) then
+          result := s
+        else begin
+          s := 'bin64\' + GameExe + '.exe';
+          if (FileExists(s)) then result := s;
+        end;
+      end;
+      {}
+    end else begin
+      { try 'bin64\.exe' }
+      s := 'bin64\' + GameExe + '.exe';
+      if (FileExists(s)) then result := s;
+      {}
+    end;
+  end else if (GetSettingBool('developerMode', False) = True) then begin
+    { try 'bin32\-dev.exe' }
+    s := 'bin32\' + GameExe + '-dev.exe';
+    if (FileExists(s)) then result := s;
+    {}
+  end;
+  OS.Destroy();
+end;
+
+{
+ Generic  LaunchGameString
+}
+Function LaunchGameString() : String;
+begin
+  result := LaunchGameString_SubDir();
+end;
+
 Function LaunchGameParms() : String;
 begin
   result := GameParms;
@@ -118,10 +188,9 @@ begin
       Application.MessageBox(m, ProgramGetStringPAnsiChar('Generic', '#err', 0), 0);
     end else begin
       f := PAnsiChar(cmdline + ' ' + cmdparms);
+      screen.cursor := crHourglass;
       WinExec(f, SW_SHOW);
-      // f := PAnsiChar(cmdline);
-      // c := PAnsiChar(cmdparms);
-      // ShellExecute(0, nil, f, c, nil, SW_SHOWNORMAL);
+      screen.cursor := crDefault;
       Application.MainForm.Close();
     end;
   except

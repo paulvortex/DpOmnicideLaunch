@@ -15786,6 +15786,7 @@ object MainForm: TMainForm
     Top = 138
     Width = 330
     Height = 35
+    Cursor = crHandPoint
     Alignment = taCenter
     AutoSize = False
     Caption = '#launch'
@@ -15811,6 +15812,7 @@ object MainForm: TMainForm
     Top = 230
     Width = 135
     Height = 31
+    Cursor = crHandPoint
     Alignment = taCenter
     AutoSize = False
     Caption = '#quit'
@@ -15836,6 +15838,7 @@ object MainForm: TMainForm
     Top = 230
     Width = 128
     Height = 31
+    Cursor = crHandPoint
     Alignment = taCenter
     AutoSize = False
     Caption = '#settings'
@@ -15861,6 +15864,7 @@ object MainForm: TMainForm
     Top = 186
     Width = 263
     Height = 31
+    Cursor = crHandPoint
     Alignment = taCenter
     AutoSize = False
     Caption = '#mapeditor'
