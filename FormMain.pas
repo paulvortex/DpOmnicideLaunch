@@ -12,8 +12,21 @@ unit FormMain;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, XPMan, common, util, defs, ExtCtrls;
+  Windows,
+  Messages,
+  Dialogs,
+  SysUtils,
+  Variants,
+  Classes,
+  Graphics,
+  Controls,
+  Forms,
+  StdCtrls,
+  XPMan,
+  common,
+  util,
+  defs,
+  ExtCtrls;
 
 type
   TMainForm = class(TForm)
@@ -65,6 +78,7 @@ var
   Drag: Boolean;
   DragX: Integer;
   DragY: Integer;
+  Launched: Boolean;
 
 implementation
 
@@ -202,6 +216,7 @@ end;
 procedure TMainForm.LaunchClick(Sender: TObject);
 begin
   LaunchGame('', '');
+  Application.MainForm.Close();
 end;
 
 procedure TMainForm.MapEditorMouseDown(Sender: TObject;
@@ -232,5 +247,4 @@ begin
   frmMapeditor.Top := Round(self.Top + (self.Height - frmMapeditor.Height)*0.5);
   frmMapeditor.ShowModal
 end;
-
 end.

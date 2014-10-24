@@ -20,7 +20,10 @@ uses
   FormMapeditor in 'FormMapeditor.pas' {frmMapeditor};
 
 {$R *.res}
-
+var
+  i : Integer;
+  cmdline : String;
+  
 begin
   Application.Initialize;
   InitProgram();
@@ -28,5 +31,13 @@ begin
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TSettingsForm, SettingsForm);
   Application.CreateForm(TfrmMapeditor, frmMapeditor);
-  Application.Run;
+  if ParamCount > 1 then begin
+    cmdline := LaunchGameParms;
+    {cmdline := cmdline + ' +set startvideos ""';}
+    for i := 1 to ParamCount do
+      cmdline := cmdline + ' "' + ParamStr(i) + '"';
+    LaunchGame('', cmdline);
+    Application.Terminate();
+  end else
+    Application.Run;
 end.

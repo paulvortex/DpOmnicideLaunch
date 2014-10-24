@@ -12,12 +12,13 @@ unit common;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ShellApi, util, defs, winVersion;
 
 Function ProgramGetStringPAnsiChar(FormName : String; ControlName : String; C : Integer) : PAnsiChar;
+Function LaunchGameString() : String;
+Function LaunchGameParms() : String;
 Function LaunchGame(cmdline : String; cmdparms : String) : String;
-Function LaunchGameString : String;
 
 implementation
 
@@ -189,9 +190,9 @@ begin
     end else begin
       f := PAnsiChar(cmdline + ' ' + cmdparms);
       screen.cursor := crHourglass;
-      WinExec(f, SW_SHOW);
+      {ShowMessage(f);}
+      WinExec(f, SW_SHOWNORMAL);
       screen.cursor := crDefault;
-      Application.MainForm.Close();
     end;
   except
     s := ProgramGetString('Generic', '#execerror', 0) + chr(13) + chr(10) + ' ' + chr(13) + chr(10) + cmdline + ' ' + cmdparms;
